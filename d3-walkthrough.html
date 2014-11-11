@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Richard Clark" />
+  <title>D3 Walkthrough</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="../reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+    </style>
+    <link rel="stylesheet" href="../reveal.js/css/theme/simple.css" id="theme">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="../reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Override the reveal.js styles -->
+    <style type="text/css">
+    	.reveal h1 { font-size: 2.00em; -webkit-hyphens: none; -moz-hyphens: none; }
+    	.reveal h2 { font-size: 1.50em; -webkit-hyphens: none; -moz-hyphens: none; }
+    </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">D3 Walkthrough</h1>
+    <h2 class="author">Richard Clark</h2>
+    <h3 class="date"></h3>
+</section>
+
+<section><section id="introducing-d3.js" class="titleslide slide level1"><h1>Introducing D3.js</h1></section><section id="hello-world-using-d3" class="slide level2">
+<h1>Hello, World using D3</h1>
+<p><a href="http://bost.ocks.org/mike/bar/">Tutorial</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">utf-8</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Hello!<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://d3js.org/d3.v3.min.js&quot;</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;script&gt;</span>
+    <span class="kw">var</span> body = <span class="ot">d3</span>.<span class="fu">select</span>(<span class="st">&quot;body&quot;</span>);
+    <span class="kw">var</span> h1 = <span class="ot">body</span>.<span class="fu">append</span>(<span class="st">&quot;h1&quot;</span>);
+    <span class="ot">h1</span>.<span class="fu">html</span>(<span class="st">&quot;Hello, world!&quot;</span>);
+  &lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;/body</span>&gt;</code></pre>
+</section><section id="multiple-sections" class="slide level2">
+<h1>Multiple sections</h1>
+<p><a href="http://bost.ocks.org/mike/bar/">Tutorial</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">utf-8</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Hello!<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://d3js.org/d3.v3.min.js&quot;</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;section&gt;&lt;/section&gt;</span>
+  <span class="kw">&lt;section&gt;&lt;/section&gt;</span>
+  <span class="kw">&lt;script&gt;</span>
+    <span class="kw">var</span> sections = <span class="ot">d3</span>.<span class="fu">selectAll</span>(<span class="st">&quot;section&quot;</span>);
+    <span class="kw">var</span> h1 = <span class="ot">sections</span>.<span class="fu">append</span>(<span class="st">&quot;h1&quot;</span>);
+    <span class="ot">h1</span>.<span class="fu">html</span>(<span class="st">&quot;Hello, world!&quot;</span>);
+  &lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;/body</span>&gt;</code></pre>
+</section><section id="add-some-style" class="slide level2">
+<h1>Add some style</h1>
+<p><a href="http://bost.ocks.org/mike/bar/">Tutorial</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">utf-8</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Hello!<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://d3js.org/d3.v3.min.js&quot;</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;section&gt;&lt;/section&gt;</span>
+  <span class="kw">&lt;section&gt;&lt;/section&gt;</span>
+  <span class="kw">&lt;script&gt;</span>
+    <span class="kw">var</span> sections = <span class="ot">d3</span>.<span class="fu">selectAll</span>(<span class="st">&quot;section&quot;</span>);
+    <span class="kw">var</span> h1 = <span class="ot">sections</span>.<span class="fu">append</span>(<span class="st">&quot;h1&quot;</span>).<span class="fu">style</span>(<span class="st">&#39;color&#39;</span>, <span class="st">&#39;red&#39;</span>);
+    <span class="ot">h1</span>.<span class="fu">html</span>(<span class="st">&quot;Hello, world!&quot;</span>);
+  &lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;/body</span>&gt;</code></pre>
+</section><section id="lets-create-a-svg-graph" class="slide level2">
+<h1>Let's create a SVG graph</h1>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">utf-8</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Simple graph (path)<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;style&gt;</span>
+    svg <span class="kw">{</span> <span class="kw">border:</span> <span class="dt">1px</span> <span class="dt">solid</span> lightgrey <span class="kw">}</span>
+    <span class="fl">.line</span> <span class="kw">{</span> <span class="kw">fill:</span> <span class="dt">none</span><span class="kw">;</span> <span class="kw">stroke:</span> steelblue<span class="kw">;</span> <span class="kw">stroke-width:</span> <span class="dt">1.5px</span> <span class="kw">}</span>
+<span class="kw">&lt;/style&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://d3js.org/d3.v3.min.js&quot;</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;svg</span><span class="ot"> width=</span><span class="st">100</span><span class="ot"> height=</span><span class="st">100</span> <span class="kw">/&gt;</span>
+  <span class="kw">&lt;script&gt;</span>
+    <span class="kw">var</span> points = [[<span class="dv">0</span>, <span class="dv">100</span>], [<span class="dv">25</span>, <span class="dv">50</span>], [<span class="dv">50</span>, <span class="dv">0</span>], [<span class="dv">75</span>, <span class="dv">50</span>], [<span class="dv">100</span>, <span class="dv">100</span>]];
+    <span class="kw">var</span> svg = <span class="ot">d3</span>.<span class="fu">select</span>(<span class="st">&quot;svg&quot;</span>);
+    <span class="kw">var</span> line = <span class="ot">d3</span>.<span class="ot">svg</span>.<span class="fu">line</span>();
+    <span class="kw">var</span> path = <span class="fu">line</span>(points);
+    <span class="ot">svg</span>.<span class="fu">append</span>(<span class="st">&#39;path&#39;</span>).<span class="fu">attr</span>(<span class="st">&#39;class&#39;</span>, <span class="st">&#39;line&#39;</span>).<span class="fu">attr</span>(<span class="st">&#39;d&#39;</span>, path);
+  &lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;/body</span>&gt;</code></pre>
+</section><section id="d3-will-call-line-if-we-supply-the-data" class="slide level2">
+<h1>D3 will call <code>line</code> if we supply the data</h1>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> points = [[<span class="dv">0</span>, <span class="dv">100</span>], [<span class="dv">25</span>, <span class="dv">50</span>], [<span class="dv">50</span>, <span class="dv">0</span>], [<span class="dv">75</span>, <span class="dv">50</span>], [<span class="dv">100</span>, <span class="dv">100</span>]];
+<span class="kw">var</span> svg = <span class="ot">d3</span>.<span class="fu">select</span>(<span class="st">&quot;svg&quot;</span>);
+<span class="kw">var</span> line = <span class="ot">d3</span>.<span class="ot">svg</span>.<span class="fu">line</span>();
+
+<span class="ot">svg</span>.<span class="fu">append</span>(<span class="st">&#39;path&#39;</span>)
+    .<span class="fu">datum</span>(points)      <span class="co">// remember the points...</span>
+    .<span class="fu">attr</span>(<span class="st">&#39;class&#39;</span>, <span class="st">&#39;line&#39;</span>)
+    .<span class="fu">attr</span>(<span class="st">&#39;d&#39;</span>, line);   <span class="co">// calls line(points) on our behalf</span></code></pre>
+</section><section id="scaled-data-accessors" class="slide level2">
+<h1>Scaled data, accessors</h1>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> points = [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>];
+<span class="kw">var</span> svg = <span class="ot">d3</span>.<span class="fu">select</span>(<span class="st">&quot;svg&quot;</span>);
+<span class="kw">var</span> x = <span class="ot">d3</span>.<span class="ot">scale</span>.<span class="fu">linear</span>().<span class="fu">domain</span>([<span class="dv">0</span>, <span class="ot">points</span>.<span class="fu">length</span> - <span class="dv">1</span>]).<span class="fu">range</span>([<span class="dv">0</span>, <span class="dv">100</span>]);
+<span class="kw">var</span> y = <span class="ot">d3</span>.<span class="ot">scale</span>.<span class="fu">linear</span>().<span class="fu">range</span>([<span class="dv">100</span>, <span class="dv">0</span>]);
+<span class="kw">var</span> line = <span class="ot">d3</span>.<span class="ot">svg</span>.<span class="fu">line</span>()
+    .<span class="fu">x</span>(<span class="kw">function</span> (d, i) { <span class="kw">return</span> <span class="fu">x</span>(i) } )
+    .<span class="fu">y</span>(<span class="kw">function</span> (d, i) { <span class="kw">return</span> <span class="fu">y</span>(d) });
+<span class="ot">svg</span>.<span class="fu">append</span>(<span class="st">&#39;path&#39;</span>).<span class="fu">datum</span>(points).<span class="fu">attr</span>(<span class="st">&#39;class&#39;</span>, <span class="st">&#39;line&#39;</span>).<span class="fu">attr</span>(<span class="st">&#39;d&#39;</span>, line);</code></pre>
+</section><section id="practice" class="slide level2">
+<h1>Practice</h1>
+<ol type="1">
+<li class="fragment">Take one of the examples, have D3 add the <code>svg</code> element dynamically (<code>.append('svg')</code>)</li>
+<li class="fragment">Set the height and width of that element (see the D3 tutorials)</li>
+<li class="fragment">(Extra) Can you graph a set of circles instead?</li>
+</ol>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="../reveal.js/lib/js/head.min.js"></script>
+  <script src="../reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'serif', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: '../reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: '../reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
